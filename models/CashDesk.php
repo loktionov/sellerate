@@ -2,14 +2,16 @@
 
 namespace app\models;
 
-use Yii;
 
 /**
  * This is the model class for table "cash_desk".
  *
  * @property int $id
  * @property string $desk_number
+ * @property string $description
  * @property string $date_add
+ *
+ * @property Rate[] $rates
  */
 class CashDesk extends \yii\db\ActiveRecord
 {
@@ -29,7 +31,8 @@ class CashDesk extends \yii\db\ActiveRecord
         return [
             [['desk_number', 'date_add'], 'required'],
             [['date_add'], 'safe'],
-            [['desk_number'], 'string', 'max' => 255],
+            [['desk_number', 'description'], 'string', 'max' => 255],
+            [['desk_number'], 'unique'],
         ];
     }
 
@@ -40,8 +43,17 @@ class CashDesk extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'desk_number' => 'Desk Number',
-            'date_add' => 'Date Add',
+            'desk_number' => 'Номер кассы',
+            'description' => 'описание',
+            'date_add' => 'добавлен',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRates()
+    {
+        return $this->hasMany(Rate::className(), ['desk_number' => 'desk_number']);
     }
 }

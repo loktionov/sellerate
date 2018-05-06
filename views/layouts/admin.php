@@ -7,6 +7,7 @@ use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 ?>
@@ -22,7 +23,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody(); Pjax::begin(); ?>
 
 <div class="wrap">
     <div class="container">
@@ -33,7 +34,7 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-<?php $this->endBody() ?>
+<?php Pjax::end(); $this->endBody(); ?>
 </body>
 </html>
 <?php $this->endPage() ?>

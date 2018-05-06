@@ -1,8 +1,17 @@
+<?php
+use yii\widgets\ActiveForm;
+use yii\bootstrap\Alert;
+?>
+<?=  Alert::widget(); ?>
 <div id="text">
 
 
 </div>
 <input type="text" id="input" style="margin-left: -2000px">
+<?php ActiveForm::begin(['id' => 'qr-scan','method' => 'post',]) ?>
+<input type="hidden" id="desk_number" name="Rate[desk_number]">
+<input type="hidden" id="check_number" name="Rate[check_number]">
+<?php ActiveForm::end(); ?>
 <script>
     $(document).ready(function () {
         $('#input').focus();
@@ -31,6 +40,9 @@
                 fp = match[9],
                 n = match[11];
             text.html(text.html() + '<br>' + fn + ' - ' + i);
+            $('#desk_number').val(fn);
+            $('#check_number').val(i);
+            $('#qr-scan').submit();
         }
     });
 </script>

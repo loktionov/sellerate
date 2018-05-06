@@ -1,12 +1,14 @@
 <?php
+/**
+ * @var $model Employee
+ */
+
 
 use app\models\Employee;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
-echo Html::a('Добавить', Url::to(['admin/addemployee']));
 
 $dataProvider = new ActiveDataProvider([
     'query' => Employee::find(),
@@ -23,9 +25,9 @@ echo GridView::widget([
         'middle_name',
         [
             'attribute' => 'photo',
-            'format' => 'html',
+            'format' => 'raw',
             'value' => function ($data) {
-                return Html::img('/images/thumb/' . $data->photo);
+                return Html::img('/images/thumb/' . $data->photo, ['data' => ['id' => $data->id]]);
             },
         ],
         [
@@ -57,4 +59,18 @@ echo GridView::widget([
             ]
         ],
     ],
-]);
+]); ?>
+<form id="rate_form" method="get">
+    <input type="hidden" id="desk_number" name="desk_number" value="<?= $model->desk_number; ?>">
+    <input type="hidden" id="check_number" name="check_number" value="<?= $model->check_number; ?>">
+    <input type="hidden" id="employee_id" name="employee_id">
+</form>
+<script>
+    $(document).ready(function () {
+        $('img[data-id]').click(function (e) {
+            let id = $(e.target).data('id');
+            $('#employee_id').val(id);
+            $('#rate_form').submit();
+        })
+    })
+</script>

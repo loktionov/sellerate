@@ -69,6 +69,11 @@ class AdminController extends Controller
         return $this->render('employee');
     }
 
+    public function actionCashdesk()
+    {
+        return $this->render('cash_desk');
+    }
+
     public function actionAddemployee()
     {
         $model = new Employee();
