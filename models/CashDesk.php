@@ -29,7 +29,7 @@ class CashDesk extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['desk_number', 'date_add'], 'required'],
+            [['desk_number'], 'required'],
             [['date_add'], 'safe'],
             [['desk_number', 'description'], 'string', 'max' => 255],
             [['desk_number'], 'unique'],

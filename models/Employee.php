@@ -4,7 +4,6 @@ namespace app\models;
 
 
 use yii\web\UploadedFile;
-use yii\imagine\Image;
 
 /**
  * This is the model class for table "employee".
@@ -36,7 +35,7 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg'],
             [['last_name', 'first_name', 'middle_name', 'photo'], 'string', 'max' => 255],
         ];
     }
@@ -60,11 +59,7 @@ class Employee extends \yii\db\ActiveRecord
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
         if ($this->validate()) {
             $imageName = $this->id . '.' . $this->imageFile->extension;
-            if ($this->imageFile->saveAs('images/origin/' . $imageName) === true) {
-                Image::thumbnail('@webroot/images/origin/' . $imageName, 150, 200)
-                    ->save(\yii::getAlias('@webroot/images/thumb/' . $imageName), ['quality' => 80]);
-                Image::thumbnail('@webroot/images/origin/' . $imageName, 600, 800)
-                    ->save(\yii::getAlias('@webroot/images/800x600/' . $imageName), ['quality' => 80]);
+            if ($this->imageFile->saveAs('images/employees/' . $imageName) === true) {
                 $this->photo = $imageName;
                 return $this->save(true, ['photo']);
             } else {

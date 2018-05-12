@@ -1,14 +1,32 @@
 <?php
+
+use app\models\Rate;
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Alert;
+
 ?>
-<?=  Alert::widget(); ?>
+<?php
+/** @var Rate $model */
+if ($model->hasErrors()) {
+    Alert::begin(
+        [
+            'options' => [
+                'class' => 'alert-warning',
+            ],
+        ]
+    );
+
+    echo implode('<br>', array_unique($model->getErrorSummary(true)));
+
+    Alert::end();
+} ?>
+
 <div id="text">
 
 
 </div>
 <input type="text" id="input" style="margin-left: -2000px">
-<?php ActiveForm::begin(['id' => 'qr-scan','method' => 'post',]) ?>
+<?php ActiveForm::begin(['id' => 'qr-scan', 'method' => 'post',]) ?>
 <input type="hidden" id="desk_number" name="Rate[desk_number]">
 <input type="hidden" id="check_number" name="Rate[check_number]">
 <?php ActiveForm::end(); ?>
@@ -29,7 +47,7 @@ use yii\bootstrap\Alert;
         if (/[\$|;]$/.test(input.val())) {
             let match = input.val().match(regex);
             input.val('');
-            if (match  === null || match.length !== 12) {
+            if (match === null || match.length !== 12) {
                 text.html(text.html() + '<br>wrong qr');
                 return false;
             }
@@ -46,3 +64,9 @@ use yii\bootstrap\Alert;
         }
     });
 </script>
+<style>
+    body {
+        background: url(images/step1.jpg) no-repeat center;
+        background-size: 75%;
+    }
+</style>

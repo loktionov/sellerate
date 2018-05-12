@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
-echo Html::a('Добавить', Url::to(['admin/addcashdesc']));
+echo Html::a('Добавить', Url::to(['admin/addcashdesk']));
 
 $dataProvider = new ActiveDataProvider([
     'query' => CashDesk::find(),

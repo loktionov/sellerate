@@ -25,7 +25,7 @@ echo GridView::widget([
             'attribute' => 'photo',
             'format' => 'html',
             'value' => function ($data) {
-                return Html::img('/images/thumb/' . $data->photo);
+                return Html::img('/images/employees/' . $data->photo, ['width' => 100]);
             },
         ],
         [
@@ -35,7 +35,7 @@ echo GridView::widget([
                     $icon = Html::tag('span', '', ['class' => "glyphicon glyphicon-pencil"]);
                     return Html::a($icon, Url::to(['admin/updateemployee', 'id' => $model->id]));
                 },
-                'delete' => function ($url, $model, $key) {
+                'delete' => function () {
 
                 },
                 'view' => function () {
@@ -45,7 +45,7 @@ echo GridView::widget([
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
-                'update' => function ($url, $model, $key) {
+                'update' => function () {
 
                 },
                 'delete' => function ($url, $model, $key) {

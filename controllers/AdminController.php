@@ -2,11 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\CashDesk;
 use app\models\Employee;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\imagine\Image;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -72,6 +72,17 @@ class AdminController extends Controller
     public function actionCashdesk()
     {
         return $this->render('cash_desk');
+    }
+
+    public function actionAddcashdesk()
+    {
+        $model = new CashDesk();
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return Yii::$app->getResponse()->redirect(Url::to(['admin/cashdesk']));
+            }
+        }
+        return $this->render('cash_desk_form', ['model' => $model]);
     }
 
     public function actionAddemployee()

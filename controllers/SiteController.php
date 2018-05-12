@@ -35,32 +35,14 @@ class SiteController extends Controller
         $model = new Rate();
         if (\yii::$app->request->isPost) {
             if ($model->load(\yii::$app->request->post()) && $model->validate(['desk_number', 'check_number'])) {
-                return \yii::$app->getResponse()->redirect(
-                    Url::to(
-                        [
-                            'site/employee',
-                            'desk_number' => $model->desk_number,
-                            'check_number' => $model->check_number
-                        ]
-                    )
-                );
-            } else {
-                $err = $model->getErrorSummary(false);
-                \yii::$app->session->setFlash('error','Ошибка', false);
+
+                if(empty($model->employee_id)) {
+                    return $this->render('employee', ['model' => $model]);
+                } else if($model->save()) {
+                    return $this->render('thx');
+                }
             }
         }
-        return $this->render('index');
-    }
-
-    public function actionEmployee($desk_number, $check_number, $employee_id = null)
-    {
-        $model = new Rate();
-        $model->check_number = $check_number;
-        $model->desk_number = $desk_number;
-        $model->employee_id = $employee_id;
-        if (!empty($employee_id) && $model->save()) {
-            return \yii::$app->getResponse()->redirect(Url::to(['site/index',]));
-        }
-        return $this->render('employee', ['model' => $model]);
+        return $this->render('index', ['model' => $model]);
     }
 }
