@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\models\Rate;
-use yii\helpers\Url;
 use yii\web\Controller;
 
 class SiteController extends Controller

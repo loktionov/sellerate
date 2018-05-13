@@ -14,10 +14,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'last_name') ?>
     <?= $form->field($model, 'first_name') ?>
     <?= $form->field($model, 'middle_name') ?>
+    <?php if (!empty($model->photo)) {
+        echo Html::img('/images/employees/' . $model->photo, ['width' => 100]);
+    }?>
     <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 

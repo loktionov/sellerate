@@ -4,7 +4,10 @@ namespace app\controllers;
 
 use app\models\CashDesk;
 use app\models\Employee;
+use app\models\Rate;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -54,15 +57,7 @@ class AdminController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+    public $defaultAction = 'employee';
 
     public function actionEmployee()
     {
@@ -74,7 +69,18 @@ class AdminController extends Controller
         return $this->render('cash_desk');
     }
 
-    public function actionAddcashdesk()
+    public function actionRate()
+    {
+        $model = new Rate();
+        if (!empty($_POST['Rate']['createTimeRange'])) {
+            $model->createTimeRange = $_POST['Rate']['createTimeRange'];
+        }
+        $dataProvider = $model->searchByDate();
+        return $this->render('rate', ['model' => $model, 'dataProvider' => $dataProvider]);
+    }
+
+    public
+    function actionAddcashdesk()
     {
         $model = new CashDesk();
         if (Yii::$app->request->isPost) {
@@ -85,7 +91,8 @@ class AdminController extends Controller
         return $this->render('cash_desk_form', ['model' => $model]);
     }
 
-    public function actionAddemployee()
+    public
+    function actionAddemployee()
     {
         $model = new Employee();
 
@@ -97,7 +104,8 @@ class AdminController extends Controller
         return $this->render('employee_add', ['model' => $model]);
     }
 
-    public function actionUpdateemployee($id)
+    public
+    function actionUpdateemployee($id)
     {
         $model = Employee::findOne(['id' => $id]);
 
@@ -109,16 +117,36 @@ class AdminController extends Controller
         return $this->render('employee_update', ['model' => $model]);
     }
 
-    public function actionDeleteemployee($id)
+    public
+    function actionDeleteemployee($id)
     {
         $this->findModel($id)->delete();
 
         return Yii::$app->getResponse()->redirect(Url::to(['admin/employee']));
     }
 
-    protected function findModel($id)
+    public
+    function actionDeletecashdesk($id)
+    {
+        $this->findModelCashDesk($id)->delete();
+
+        return Yii::$app->getResponse()->redirect(Url::to(['admin/cashdesk']));
+    }
+
+    protected
+    function findModel($id)
     {
         if (($model = Employee::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    protected
+    function findModelCashDesk($id)
+    {
+        if (($model = CashDesk::findOne($id)) !== null) {
             return $model;
         }
 
@@ -130,7 +158,8 @@ class AdminController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin()
+    public
+    function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -152,7 +181,8 @@ class AdminController extends Controller
      *
      * @return Response
      */
-    public function actionLogout()
+    public
+    function actionLogout()
     {
         Yii::$app->user->logout();
 

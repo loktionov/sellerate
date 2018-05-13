@@ -33,7 +33,7 @@ echo GridView::widget([
                 },
                 'delete' => function ($url, $model, $key) {
                     $icon = Html::tag('span', '', ['class' => "glyphicon glyphicon-trash"]);
-                    return Html::a($icon, Url::to(['admin/deletecashdesc', 'id' => $model->id]));
+                    return Html::a($icon, Url::to(['admin/deletecashdesk', 'id' => $model->id]));
                 },
                 'view' => function () {
                 }

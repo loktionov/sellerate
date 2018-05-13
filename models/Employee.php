@@ -57,16 +57,14 @@ class Employee extends \yii\db\ActiveRecord
     public function upload()
     {
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
-        if ($this->validate()) {
-            $imageName = $this->id . '.' . $this->imageFile->extension;
-            if ($this->imageFile->saveAs('images/employees/' . $imageName) === true) {
-                $this->photo = $imageName;
-                return $this->save(true, ['photo']);
-            } else {
-                return false;
-            }
-        } else {
+
+        $imageName = $this->id . '.' . $this->imageFile->extension;
+        if (!empty($this->imageFile) AND $this->imageFile->saveAs('images/employees/' . $imageName) === true) {
+            $this->photo = $imageName;
+            return $this->save(true, ['photo']);
+        } else if (empty($this->photo)) {
             return false;
         }
+        return true;
     }
 }

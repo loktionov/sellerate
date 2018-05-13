@@ -7,5 +7,5 @@
 <script>
     setTimeout(function () {
         window.location.replace('/');
-    }, 5000)
+    }, 1000)
 </script>

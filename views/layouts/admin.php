@@ -3,7 +3,8 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\widgets\Alert;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
@@ -23,9 +24,47 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+<style>
+    html,
+    body {
+        height: 100%;
+        background-color: #fff;
+    }
+</style>
 <?php $this->beginBody(); Pjax::begin(); ?>
 
 <div class="wrap">
+    <?php
+    NavBar::begin([
+        'brandUrl' => Yii::$app->homeUrl,
+        'brandOptions'=>[
+            'style' => 'height: 80px;',
+        ],
+        'options' => [
+            'class' => 'navbar-default navbar-fixed-top',
+        ],
+    ]);
+    $menuItems = [
+        ['label' => 'Продавцы', 'url' => ['/admin/employee']],
+        ['label' => 'Кассы', 'url' => ['/admin/cashdesk']],
+        ['label' => 'Рейтинг', 'url' => ['/admin/rate']],
+    ];
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Вход', 'url' => ['/admin/login']];
+    } else {
+        $menuItems[] = [
+            'label' => 'Выход',
+            'url' => ['/admin/logout'],
+            'linkOptions' => ['data-method' => 'post']
+        ];
+    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $menuItems,
+    ]);
+    NavBar::end();
+    ?>
+
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
