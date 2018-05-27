@@ -59,7 +59,8 @@ class Employee extends \yii\db\ActiveRecord
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
 
         $imageName = $this->id . '.' . $this->imageFile->extension;
-        if (!empty($this->imageFile) AND $this->imageFile->saveAs('images/employees/' . $imageName) === true) {
+        $path = realpath(\yii::getAlias('@webroot') . \yii::$app->params['imagesPath']);
+        if (!empty($this->imageFile) AND $this->imageFile->saveAs($path . DIRECTORY_SEPARATOR . $imageName) === true) {
             $this->photo = $imageName;
             return $this->save(true, ['photo']);
         } else if (empty($this->photo)) {

@@ -54,6 +54,6 @@ class CashDesk extends \yii\db\ActiveRecord
      */
     public function getRates()
     {
-        return $this->hasMany(Rate::className(), ['desk_number' => 'desk_number']);
+        return $this->hasMany(Rate::class, ['desk_number' => 'desk_number']);
     }
 }

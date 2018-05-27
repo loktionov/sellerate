@@ -25,7 +25,7 @@ echo GridView::widget([
             'attribute' => 'photo',
             'format' => 'html',
             'value' => function ($data) {
-                return Html::img('/images/employees/' . $data->photo, ['width' => 100]);
+                return Html::img(\yii::$app->params['imagesPath'] . $data->photo, ['width' => 100]);
             },
         ],
         [

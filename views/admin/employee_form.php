@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'first_name') ?>
     <?= $form->field($model, 'middle_name') ?>
     <?php if (!empty($model->photo)) {
-        echo Html::img('/images/employees/' . $model->photo, ['width' => 100]);
+        echo Html::img(\yii::$app->params['imagesPath'] . $model->photo, ['width' => 100]);
     }?>
     <?= $form->field($model, 'imageFile')->fileInput() ?>
 

@@ -129,7 +129,7 @@ class Rate extends \yii\db\ActiveRecord
 
         $query->select(['e.last_name', 'e.first_name', 'COUNT(*) c', 'SUM(IFNULL(`total`, 0)) s'])
             ->from('rate t')
-            ->rightJoin('employee e', 'e.id = t.employee_id')
+            ->innerJoin('employee e', 'e.id = t.employee_id')
             ->groupBy(['e.last_name', 'e.first_name'])
             ->orderBy('c desc, s desc');
         if (!empty($this->createTimeRange)) {

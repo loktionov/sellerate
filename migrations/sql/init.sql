@@ -79,7 +79,6 @@ DELIMITER $$
 -- Create trigger `insert_date_add`
 --
 CREATE
-	DEFINER = 'root'@'%'
 TRIGGER insert_date_add
 	BEFORE INSERT
 	ON cash_desk
@@ -120,7 +119,6 @@ DELIMITER $$
 -- Create trigger `insert_rate_date_add`
 --
 CREATE
-	DEFINER = 'root'@'%'
 TRIGGER insert_rate_date_add
 	BEFORE INSERT
 	ON rate

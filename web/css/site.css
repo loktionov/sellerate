@@ -133,6 +133,7 @@ div#flex-gallery {
     flex-direction: column;
     height: 80vh;
     justify-content: space-evenly;
+    margin-top: 65px;
 }
 
 div.flex-gallery-row {

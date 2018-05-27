@@ -35,9 +35,9 @@ class SiteController extends Controller
         if (\yii::$app->request->isPost) {
             if ($model->load(\yii::$app->request->post()) && $model->validate(['desk_number', 'check_number'])) {
 
-                if(empty($model->employee_id)) {
+                if (empty($model->employee_id)) {
                     return $this->render('employee', ['model' => $model]);
-                } else if($model->save()) {
+                } else if ($model->save()) {
                     return $this->render('thx');
                 }
             }

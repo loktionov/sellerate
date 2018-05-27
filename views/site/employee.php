@@ -1,3 +1,9 @@
+<style>
+    body {
+        background: url(images/step2-employees.jpg) no-repeat center;
+        background-size: 101%;
+    }
+</style>
 <?php
 /**
  * @var $model Employee
@@ -5,9 +11,12 @@
 
 
 use app\models\Employee;
+use app\models\Rate;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
+/** @var Rate $model */
 
 $dataProvider = new ActiveDataProvider([
     'query' => Employee::find(),
@@ -16,18 +25,14 @@ $dataProvider = new ActiveDataProvider([
     ],
 ]);
 $allEmployees = Employee::find()->all();
-$splitedEmployees = array_chunk($allEmployees, 6);
+$splitedEmployees = array_chunk($allEmployees, 5);
 ?>
 <div id="flex-gallery">
-    <?php foreach ($splitedEmployees
-
-                   as $split): ?>
+    <?php foreach ($splitedEmployees as $split): ?>
         <div class="flex-gallery-row">
-            <?php foreach ($split
-
-                           as $employee): ?>
+            <?php foreach ($split as $employee): ?>
                 <div class="flex-gallery-item" data-employee-id="<?= $employee->id ?>">
-                    <?= Html::img('/images/employees/' . $employee->photo, ['data' => ['employee-id' => $employee->id], 'width' => 180, 'height' => 240]); ?>
+                    <?= Html::img(\yii::$app->params['imagesPath'] . $employee->photo, ['data' => ['employee-id' => $employee->id], 'width' => 180, 'height' => 240]); ?>
                     <div style="text-align: center;">
                         <span class="last-name"><?= $employee->first_name ?></span>
                         <br>
