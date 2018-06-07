@@ -4,6 +4,14 @@ body {
     background-color: #409307;
 }
 
+h1 {
+    font-size: 85px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;

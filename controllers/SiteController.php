@@ -31,6 +31,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        return $this->render('index');
+    }
+
+    public function actionScan()
+    {
         $model = new Rate();
         if (\yii::$app->request->isPost) {
             if ($model->load(\yii::$app->request->post()) && $model->validate(['desk_number', 'check_number'])) {
@@ -42,6 +47,6 @@ class SiteController extends Controller
                 }
             }
         }
-        return $this->render('index', ['model' => $model]);
+        return $this->render('scan', ['model' => $model]);
     }
 }
