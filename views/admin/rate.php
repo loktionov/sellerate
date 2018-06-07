@@ -3,6 +3,7 @@
 use kartik\daterange\DateRangePicker;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $model app\models\Rate */
@@ -17,21 +18,24 @@ echo DateRangePicker::widget([
         'locale' => [
             'format' => 'd-m-Y'
         ]
+    ],
+    'options' => [
+        'style' => 'float: left; width: 85%;',
+        'autocomplete' => 'off'
     ]
-]);
+]); ?>
 
-echo Html::submitButton('Показать', ['class' => 'btn btn-success']);
+<?= Html::submitButton('Показать', ['class' => 'btn btn-success', 'style' => 'float: right']); ?>
+    <div style="clear: both"></div>
+<?php ActiveForm::end(); ?>
 
-ActiveForm::end();
-
-
-echo GridView::widget([
+<?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
         [
             'attribute' => 'last_name',
             'label' => 'Продавец',
-            'value' => function($data) {
+            'value' => function ($data) {
                 return $data['first_name'] . ' ' . $data['last_name'];
             }
         ],
