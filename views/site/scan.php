@@ -22,6 +22,11 @@ if ($model->hasErrors()){
 <input type="hidden" id="total" name="Rate[total]">
 <?php ActiveForm::end(); ?>
 <script>
+
+    setTimeout(function () {
+        window.location.replace('/');
+    }, 30000);
+
     $(document).ready(function () {
         $('#qr-input').focus();
     });

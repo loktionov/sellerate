@@ -32,7 +32,8 @@ $splitedEmployees = array_chunk($allEmployees, 5);
         <div class="flex-gallery-row">
             <?php foreach ($split as $employee): ?>
                 <div class="flex-gallery-item" data-employee-id="<?= $employee->id ?>">
-                    <?= Html::img(\yii::$app->params['imagesPath'] . $employee->photo, ['data' => ['employee-id' => $employee->id], 'width' => 180, 'height' => 240]); ?>
+                    <?= Html::img(\yii::$app->params['imagesPath'] . $employee->photo,
+                        ['data' => ['employee-id' => $employee->id], 'width' => 270, 'height' => 360]); ?>
                     <div style="text-align: center;">
                         <span class="last-name"><?= $employee->first_name ?></span>
                         <br>

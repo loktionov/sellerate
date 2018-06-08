@@ -135,8 +135,8 @@ class Rate extends \yii\db\ActiveRecord
             ->groupBy(['e.last_name', 'e.first_name'])
             ->orderBy('c desc, s desc');
         if (!empty($this->createTimeRange)) {
-            $query->andFilterWhere(['>=', 'date_purchase', date('Y-m-d', $this->createTimeStart)])
-                ->andFilterWhere(['<', 'date_purchase', date('Y-m-d', $this->createTimeEnd)]);
+            $query->andFilterWhere(['>=', 'date_add', date('Y-m-d', $this->createTimeStart)])
+                ->andFilterWhere(['<', 'date_add', date('Y-m-d', $this->createTimeEnd)]);
         }
         return $dataProvider;
     }
