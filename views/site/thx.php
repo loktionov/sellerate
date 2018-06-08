@@ -5,6 +5,9 @@
     }
 </style>
 <script>
+    $(document).on('click', 'body', function () {
+        window.location.replace('/');
+    });
     setTimeout(function () {
         window.location.replace('/');
     }, 10000)

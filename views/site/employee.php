@@ -51,7 +51,7 @@ $splitedEmployees = array_chunk($allEmployees, 5);
 <input type="hidden" id="employee_id" name="Rate[employee_id]">
 <?php ActiveForm::end(); ?>
 <script>
-    $(document).on('click', '.flex-gallery-item', function (e) {
+    $(document).on('click', '.flex-gallery-item img', function (e) {
         $('#employee_id').val($(e.target).data('employee-id'));
         $('#rate_form').submit();
     })

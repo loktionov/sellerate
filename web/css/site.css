@@ -152,6 +152,9 @@ div.flex-gallery-row {
 div.flex-gallery-item {
     background: white;
     padding: 10px;
+}
+
+div.flex-gallery-item img{
     cursor: pointer;
 }
 
